@@ -9,11 +9,13 @@ public class InventoryHelper {
 	static Class<?> obcCraftInventory;
 	static Class<?> obcCraftInventoryCustom;
 	static Class<?> obcMinecraftInventory;
+	static Class<?> nmsChatComponentText;
 
 	static {
 		try {
 			obcCraftInventory = Reflection.getOBCClass("inventory.CraftInventory");
 			obcCraftInventoryCustom = Reflection.getOBCClass("inventory.CraftInventoryCustom");
+			nmsChatComponentText = Reflection.getNMSClass("ChatComponentText");
 			for (Class<?> c : obcCraftInventoryCustom.getDeclaredClasses()) {
 				if (c.getSimpleName().equals("MinecraftInventory")) {
 					obcMinecraftInventory = c;
@@ -28,7 +30,7 @@ public class InventoryHelper {
 	public static void changeTitle(Inventory inv, String title) {
 		try {
 			Object minecrafInventory = AccessUtil.setAccessible(obcCraftInventory.getDeclaredField("inventory")).get(inv);
-			AccessUtil.setAccessible(obcMinecraftInventory.getDeclaredField("title")).set(minecrafInventory, title);
+			AccessUtil.setAccessible(obcMinecraftInventory.getDeclaredField("title")).set(minecrafInventory, nmsChatComponentText.getConstructor(String.class).newInstance(title));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
