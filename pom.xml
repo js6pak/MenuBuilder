@@ -71,11 +71,6 @@
             <version>1.14-pre5-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
-        <dependency>
-            <groupId>com.github.js6pak</groupId>
-            <artifactId>ItemBuilder</artifactId>
-            <version>master-SNAPSHOT</version>
-        </dependency>
     </dependencies>
 
     <repositories>
